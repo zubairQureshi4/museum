@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import DetailCards from "./DetailCards";
+import MainNavBar from "./MainNavbar";
 
 const AllData = () => {
   const [jsonData, setJsonData] = useState([]);
   const [MainData, setMainData] = useState([]);
+  const [newFetch, setNewFetch] = useState(10);
   const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
@@ -34,10 +36,15 @@ const AllData = () => {
         const jsonDat = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${arr}`)
         setJsonData((prevData) => [...prevData, jsonDat.data]);
 }
-console.log("arr", jsonData);
+
+const setNewPageData = () =>{
+  setSlicedData(newFetch - 10 , newFetch)
+  setNewFetch(newFetch + 10)
+}
 
   return (
     <div>
+    <MainNavBar newPage={setNewPageData}/>
     {loading ? <h1>Loading...</h1> : 
     <div className="row">
       {jsonData.map((item)=>{return (
@@ -48,7 +55,6 @@ console.log("arr", jsonData);
       })}
     </div>
     }
-      <Button onClick={()=>{setSlicedData(1, 10)}}>GetData</Button>
     </div>
   );
 };
