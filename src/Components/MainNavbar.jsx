@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 
-const MainNavBar = ({newPage}) => {
+const MainNavBar = ({newPage, setIsUser}) => {
   return (
     <Navbar bg="light" expand="lg">
       <Button variant="primary" onClick={newPage}>Next</Button>
@@ -10,11 +10,10 @@ const MainNavBar = ({newPage}) => {
         <Nav className="mr-auto">
         </Nav>
         <Nav className="ml-auto">
-          <NavDropdown title="User" id="basic-nav-dropdown">
+          <NavDropdown title={localStorage.getItem('email')} id="basic-nav-dropdown">
             <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="#settings">Settings</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
+            <NavDropdown.Item href="#logout" onClick={()=>{localStorage.removeItem('email') ,setIsUser(false)}}>Logout</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

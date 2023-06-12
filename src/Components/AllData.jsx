@@ -1,16 +1,22 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import  { useEffect, useState } from "react";
 import DetailCards from "./DetailCards";
 import MainNavBar from "./MainNavbar";
+import LoginAndLogout from "./LoginAndLogout";
 
 const AllData = () => {
   const [jsonData, setJsonData] = useState([]);
   const [MainData, setMainData] = useState([]);
   const [newFetch, setNewFetch] = useState(10);
   const [loading, setLoading] = useState(false);
+  const [isUser, setIsUser] = useState(false);
 
   useEffect(()=>{
+    const getUser = () =>{
+      if(localStorage.getItem('email')){
+        setIsUser(true)
+      }
+    }
     const getdata = async () => {
       setLoading(true);
       const response = await axios.get("https://collectionapi.metmuseum.org/public/collection/v1/objects");
@@ -18,6 +24,8 @@ const AllData = () => {
       setLoading(false);
     };
     getdata()
+    getUser()
+    setNewPageData()
   },[])
 
   const setSlicedData = async (start, end) =>{
@@ -32,7 +40,6 @@ const AllData = () => {
 
 
   const getAllSingleJson = async (arr) =>{
-        console.log(`Start loop ${arr}`);
         const jsonDat = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${arr}`)
         setJsonData((prevData) => [...prevData, jsonDat.data]);
 }
@@ -44,7 +51,9 @@ const setNewPageData = () =>{
 
   return (
     <div>
-    <MainNavBar newPage={setNewPageData}/>
+    {isUser ? 
+      <div>
+    <MainNavBar newPage={setNewPageData} setIsUser={setIsUser}/>
     {loading ? <h1>Loading...</h1> : 
     <div className="row">
       {jsonData.map((item)=>{return (
@@ -55,6 +64,8 @@ const setNewPageData = () =>{
       })}
     </div>
     }
+    </div> : <LoginAndLogout setIsUser={setIsUser}/> 
+}
     </div>
   );
 };
