@@ -7,7 +7,7 @@ function DetailCards({props}) {
   return (
     <CardGroup className=''>
       <Card className='m-5'>
-        <Card.Img variant="top" src="holder.js/100px160" />
+        <Card.Img variant="top" src={props?.primaryImage} />
         <Card.Body>
           <Card.Title>artistNationality {props?.artistNationality}</Card.Title>
           <Card.Text>

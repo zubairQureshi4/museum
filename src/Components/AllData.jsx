@@ -10,23 +10,13 @@ const AllData = () => {
   const [newFetch, setNewFetch] = useState(10);
   const [loading, setLoading] = useState(false);
   const [isUser, setIsUser] = useState(false);
-
-  useEffect(()=>{
-    const getUser = () =>{
-      if(localStorage.getItem('email')){
-        setIsUser(true)
-      }
-    }
-    const getdata = async () => {
-      setLoading(true);
-      const response = await axios.get("https://collectionapi.metmuseum.org/public/collection/v1/objects");
-      setMainData(response.data.objectIDs.sort((a, b) => a - b))     
-      setLoading(false);
-    };
-    getdata()
-    getUser()
-    setNewPageData()
-  },[])
+ 
+  const getdata = async () => {
+    setLoading(true);
+    const response = await axios.get("https://collectionapi.metmuseum.org/public/collection/v1/objects");
+    setMainData(response.data.objectIDs.sort((a, b) => a - b))     
+    setLoading(false);
+  };
 
   const setSlicedData = async (start, end) =>{
     setLoading(true);
@@ -43,12 +33,21 @@ const AllData = () => {
         const jsonDat = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${arr}`)
         setJsonData((prevData) => [...prevData, jsonDat.data]);
 }
-
+console.log(jsonData);
 const setNewPageData = () =>{
   setSlicedData(newFetch - 10 , newFetch)
   setNewFetch(newFetch + 10)
 }
 
+useEffect(()=>{
+  const getFirstData = async () =>{
+    if(localStorage.getItem('email')){
+     await getdata()
+      setIsUser(true)
+    }
+  }
+  getFirstData();
+},[isUser])
   return (
     <div>
     {isUser ? 
@@ -57,7 +56,7 @@ const setNewPageData = () =>{
     {loading ? <h1>Loading...</h1> : 
     <div className="row">
       {jsonData.map((item)=>{return (
-      <div className="col-6" key={item.objectId}>
+      <div className="col-6" key={Math.random()}>
       <DetailCards props={item}/>
       </div>
       )
