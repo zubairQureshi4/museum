@@ -40,9 +40,9 @@ console.log("arr", jsonData);
     <div>
     {loading ? <h1>Loading...</h1> : 
     <div className="row">
-      {jsonData.map((i)=>{return (
-      <div className="col-6">
-      <DetailCards/>
+      {jsonData.map((item)=>{return (
+      <div className="col-6" key={item.objectId}>
+      <DetailCards props={item}/>
       </div>
       )
       })}

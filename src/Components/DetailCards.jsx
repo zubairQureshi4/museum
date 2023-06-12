@@ -1,14 +1,15 @@
+/* eslint-disable react/prop-types */
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import './index.css'
-function DetailCards() {
+function DetailCards({props}) {
   return (
     <CardGroup className=''>
       <Card className='m-5'>
         <Card.Img variant="top" src="holder.js/100px160" />
         <Card.Body>
-          <Card.Title>Card title</Card.Title>
+          <Card.Title>artistNationality {props?.artistNationality}</Card.Title>
           <Card.Text>
             This is a wider card with supporting text below as a natural lead-in
             to additional content. This content is a little bit longer.
