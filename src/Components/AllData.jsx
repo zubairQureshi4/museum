@@ -52,11 +52,11 @@ useEffect(()=>{
     <div>
     {isUser ? 
       <div>
-    <MainNavBar newPage={setNewPageData} setIsUser={setIsUser}/>
+    <MainNavBar newPage={setNewPageData} setIsUser={setIsUser} isLoading={loading}/>
     {loading ? <h1>Loading...</h1> : 
     <div className="row">
       {jsonData.map((item)=>{return (
-      <div className="col-6" key={Math.random()}>
+      <div className="col-4" key={Math.random()}>
       <DetailCards props={item}/>
       </div>
       )
