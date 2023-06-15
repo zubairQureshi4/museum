@@ -47,7 +47,7 @@ useEffect(()=>{
     }
   }
   getFirstData();
-},[isUser])
+},[])
   return (
     <div>
     {isUser ? 
