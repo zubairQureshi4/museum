@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
-import myImage from '../../public/logo.png';
+// import myImage from '../../public/logo.png';
 
 const LoginAndLogout = ({setIsUser}) => {
   const [email, setEmail] = useState('');
@@ -57,7 +57,7 @@ const LoginAndLogout = ({setIsUser}) => {
             </div>
             <div className='col-6'>
 
-        <img src={myImage}></img>
+        {/* <img src={myImage}></img> */}
         </div>
      
     </div>

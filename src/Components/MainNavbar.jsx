@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
+import './Navbar.css'
 
 const MainNavBar = ({newPage, setIsUser, isLoading}) => {
   return (
     <Navbar bg="light" expand="lg">
-      <Button variant="primary" onClick={newPage} disabled={isLoading}>Next {isLoading && <div className="spinner-border text-danger" role="status"><span className="sr-only"></span></div>}</Button>
+      <Button className='btnNav' variant="danger" onClick={newPage} disabled={isLoading}>{isLoading ? <div className="spinner-border" role="status"><span className="sr-only"></span></div>: <spam>Next</spam>}</Button>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">

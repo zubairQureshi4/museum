@@ -2,26 +2,30 @@
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import './index.css'
-function DetailCards({props}) {
+import './DetailCard.css'
+function DetailCards({props, setItemDetail, setSingleData}) {
   return (
-    <CardGroup className=''>
-      <Card className='m-5'>
+    <div className='divContainer'>
+    
+    <CardGroup className='CardImg'>
+      <Card className='m-5 cardHeight'>
+      {props?.primaryImage ? 
         <Card.Img variant="top" src={props?.primaryImage} />
+      : <h1 className='text-center mt-3'>No Image</h1>}
         <Card.Body>
-          <Card.Title>artistNationality {props?.artistNationality}</Card.Title>
-          <Card.Title>Title {props?.name}</Card.Title>
+          <Card.Title>Title: {props?.title}</Card.Title>
+          <Card.Title>Name: {props?.objectName}</Card.Title>
           <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
+            Credit Line: {props?.creditLine}
           </Card.Text>
         </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
+        <Card.Footer className='bgColor'>
+          <small className="text-muted">Object Date: {props?.objectDate} </small>
+        <Button className='button-style' variant='danger' onClick={()=>{setItemDetail(false), setSingleData(props)}}>Open Furthur Details</Button>
         </Card.Footer>
-        <Button className='button-style mb-4'>Go to Details</Button>
       </Card>
     </CardGroup>
+    </div>
     
   );
 }
