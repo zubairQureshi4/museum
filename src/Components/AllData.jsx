@@ -4,6 +4,7 @@ import DetailCards from "./DetailCards";
 import MainNavBar from "./MainNavbar";
 import LoginAndLogout from "./LoginAndLogout";
 import DetailModal from './DetailModal'
+import '../index.css'
 
 const AllData = () => {
   const [jsonData, setJsonData] = useState([]);
@@ -44,7 +45,6 @@ const AllData = () => {
     setSlicedData(newFetch - 10, newFetch);
     setNewFetch(newFetch + 10);
   };
-
   useEffect(() => {
     const getFirstData = async () => {
       if (localStorage.getItem("email")) {
@@ -66,7 +66,15 @@ const AllData = () => {
           {itemDetail ? 
           <div>
           {loading ? (
-            <h1>Loading...</h1>
+            <div>
+
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+  <div className="spinner-border spinner-lg spinnerStyle" role="status">
+    <span className="sr-only"></span>
+  </div>
+</div>
+            </div>
+
           ) : (
             <div className="row">
             <h1 className="text-center mt-2">Welcome To The Online Museum</h1>
